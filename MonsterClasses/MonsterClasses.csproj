@@ -43,8 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBattle.cs" />
+    <Compile Include="IChat.cs" />
+    <Compile Include="ITrade.cs" />
+    <Compile Include="Monster.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeaMonster.cs" />
+    <Compile Include="SpaceMonster.cs" />
+    <Compile Include="TradeStore.cs" />
+    <Compile Include="TradeStoreTrade.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
