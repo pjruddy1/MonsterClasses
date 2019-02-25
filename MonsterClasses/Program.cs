@@ -6,30 +6,26 @@ using System.Threading.Tasks;
 
 namespace MonsterClasses
 {
+    // PJ Ruddy
+    // CIT 195
+    // 2/24/19
     class Program
     {
         static void Main(string[] args)
         {
-
+            DisplayOpeningScreen();
             DisplayMenu();
             DisplayClosingScreen();            
         }
 
-        
+        /// <summary>
+        /// Instantiate objects using 3 constructors
+        /// </summary>
+        /// <param name="seaMonsters"></param>
         #region  Using 3 Different constructors to instantiate objects
         static void InitializeSeaMonster(List<SeaMonster> seaMonsters)
         {
-            SeaMonster suzy = new SeaMonster(99, "Suzy", 100)
-            {
-                
-                Age = 478,
-                Gold = 1000,
-                HasGills = true,
-                SeaName = "Baltic Sea"
-            };
-            seaMonsters.Add(suzy);
-
-            SeaMonster globby = new SeaMonster(45, "globby", 125)
+            SeaMonster globby = new SeaMonster(45, "Globby", 125)
             {
                 Age = 555,
                 Gold = 799,
@@ -43,19 +39,7 @@ namespace MonsterClasses
         }
 
         static void InitializeSpaceMonster(List<SpaceMonster> spaceMonsters)
-        {
-            
-            SpaceMonster bill = new SpaceMonster("Bill")
-            {
-                Id = 195,
-                Age = 1001,
-                Gold = 600,
-                HitPoints = 125,                
-                HasSpaceship = true
-                
-            };
-            spaceMonsters.Add(bill);
-
+        { 
             SpaceMonster kuhuana = new SpaceMonster("Kuhuana")
             {
                 Id = 117,
@@ -94,30 +78,9 @@ namespace MonsterClasses
                 WeaponInventorySlot3 = Monster.Weapons.WATERCANON,
                 WeaponSlotPrice3 = 25              
 
-            };
-            TradeStore seaClerk = new TradeStore()
-            {
-                Id = 1,
-                Name = "Sea Store Clerk",
-                Age = 5000,
-                Gold = 1000000,
-                HitPoints = 1000000,
-                ArmourCarried = Monster.Armour.WETSUIT,
-                WeaponsCarried = Monster.Weapons.WATERCANON,
-                ArmourInventorySlot1 = Monster.Armour.WETSUIT,
-                ArmourSlotPrice1 = 75,
-                ArmourInventorySlot2 = Monster.Armour.HELMET,
-                ArmourSlotPrice2 = 50,
-                ArmourInventorySlot3 = Monster.Armour.CHESTPLATE,
-                ArmourSlotPrice3 = 25,
-                WeaponInventorySlot1 = Monster.Weapons.WATERCANON,
-                WeaponSlotPrice1 = 75,
-                WeaponInventorySlot2 = Monster.Weapons.CATAPULT,
-                WeaponSlotPrice2 = 50,
-                WeaponInventorySlot3 = Monster.Weapons.BEAMRAY,
-                WeaponSlotPrice3 = 25
-            };
-            tradeStore.Add(seaClerk);
+            };  
+            
+            tradeStore.Add(spaceClerk);
         }
         #endregion
 
@@ -223,55 +186,59 @@ namespace MonsterClasses
                         {
                             Console.WriteLine(spaceMonster.Name);
                         }
-                        Console.WriteLine("Which monster would you like to edit");
+                        
                         do
                         {
+                            Console.WriteLine("Which monster would you like to edit");
                             monsterName = Console.ReadLine();
                             foreach (SpaceMonster spaceMonster in spaceMonsters)
                             {
                                 if (monsterName == spaceMonster.Name)
-                                {
-                                    DisplayEditSpaceMonster(spaceMonster);
+                                {                                    
                                     validResponse = true;
                                 }
                                 else
-                                {
-                                    Console.WriteLine("Please try again unfound monster.");
+                                {                                    
                                     validResponse = false;
                                 }
                             }
                         } while (!validResponse);
+                        foreach (SpaceMonster spaceMonster in spaceMonsters)
+                        {
+                            DisplayEditSpaceMonster(spaceMonster);
+                        }
                         break;
                     case "SeaMonster":
                         foreach (SeaMonster seaMonster in seaMonsters)
                         {
                             Console.WriteLine(seaMonster.Name);
-                        }
-                        Console.WriteLine("which monster would you like to edit?");
-                        do
+                        }                       
+                        do                            
                         {
+                            Console.WriteLine("which monster would you like to edit?");
                             monsterName = Console.ReadLine();
                             foreach (SeaMonster seaMonster in seaMonsters)
                             {
                                 if (monsterName == seaMonster.Name)
-                                {
-                                    DisplayEditSeaMonster(seaMonster);
+                                {                                    
                                     validResponse = true;
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Please try again unfound monster.");
                                     validResponse = false;
                                 }
                             }
                         } while (!validResponse);
-                        break;
+                        foreach (SeaMonster seaMonster in seaMonsters)
+                        {
+                            DisplayEditSeaMonster(seaMonster);
+                        }
+                            break;
                     default:
                         break;
                 }
             }
-        }
-            
+        }     
 
 
         //
@@ -508,15 +475,15 @@ namespace MonsterClasses
         {
             foreach (SeaMonster seaMonster in seaMonsters)
             {
-                Console.WriteLine($"{seaMonster.Name}, {seaMonster.Id}, {seaMonster.HitPoints}, {seaMonster.Gold}");
+                Console.WriteLine($"Name: {seaMonster.Name}, ID: {seaMonster.Id}, HitPoints: {seaMonster.HitPoints}, Gold: {seaMonster.Gold}");
             }
             foreach (SpaceMonster spaceMonster in spaceMonsters)
             {
-                Console.WriteLine($"{spaceMonster.Name}, {spaceMonster.Id}, {spaceMonster.HitPoints}, {spaceMonster.Gold}");
+                Console.WriteLine($"Name: {spaceMonster.Name}, ID: {spaceMonster.Id}, HitPoints: {spaceMonster.HitPoints}, Gold: {spaceMonster.Gold}");
             }
             foreach (TradeStore tradeStore in tradeStores)
             {
-                Console.WriteLine($"{tradeStore.Name}, {tradeStore.Id}, {tradeStore.HitPoints}, {tradeStore.Gold}");
+                Console.WriteLine($"Name: {tradeStore.Name}, ID: {tradeStore.Id}, HitPoints: {tradeStore.HitPoints}, Gold: {tradeStore.Gold}");
             }
         }
 
@@ -529,8 +496,7 @@ namespace MonsterClasses
             string monsterChoosen;
             bool validResponse = false;
 
-            while (!exiting)
-            {
+           
                 DisplayHeader("Space Monster Play House");
                 Console.WriteLine("Here are the Space Monsters Available:");
                 foreach (SpaceMonster spaceMonster in spaceMonsters)
@@ -550,8 +516,7 @@ namespace MonsterClasses
                             validResponse = true;
                         }
                         else
-                        {
-                            Console.WriteLine("Please Enter an Excisting Monster.");
+                        {                            
                             validResponse = false;
                         }
                     }
@@ -568,11 +533,16 @@ namespace MonsterClasses
                         Console.WriteLine($"Name: {spaceMonster.Name}");
                         Console.WriteLine($"Age: {spaceMonster.Age}");
                         Console.WriteLine($"Active: {(spaceMonster.IsActive() ? "Yes" : "No")}");
+                        Console.WriteLine($"Feeling Aggresive: {(spaceMonster.WillAttack() ? "yes" : "No")}");
                         Console.WriteLine();
+                       
+                    while(!exiting)
+                    {
                         Console.WriteLine($"What would you like {spaceMonster.Name} to do:");
                         Console.WriteLine("\t\t\t\t1) Trade");
                         Console.WriteLine("\t\t\t\t2) Battle");
                         Console.WriteLine("\t\t\t\t3) Chat");
+                        Console.WriteLine("\t\t\t\t4) Exit");
                         Console.Write("Please type your response");
                         do
                         {
@@ -581,26 +551,30 @@ namespace MonsterClasses
                             {
                                 case 1:
                                     DisplayTradeInterface(spaceMonster, spaceMonsters, seaMonsters, tradeStores);
+                                    validResponse = true;
                                     break;
                                 case 2:
                                     DisplayBattleInterface(spaceMonster, spaceMonsters, seaMonsters, tradeStores);
+                                    validResponse = true;
                                     break;
                                 case 3:
                                     DisplayChatInterface(spaceMonster, seaMonsters, tradeStores);
+                                    validResponse = true;
                                     break;
                                 case 4:
                                     exiting = true;
+                                    validResponse = true;
                                     break;
                                 default:
                                     Console.WriteLine("Please Enter a valid Response. ");
                                     break;
                             }
-                        } while (exiting);
+                        } while (!validResponse);
+                    }
+                        
 
                     }
-                }
-            }
-            
+                }           
             
         }
 
@@ -613,19 +587,18 @@ namespace MonsterClasses
             string monsterChoosen;
             bool validResponse = false;
 
-            while (!exiting)
-            {
+            
                 DisplayHeader("Sea Monster Play House");
                 Console.WriteLine("Here are the Sea Monsters Available:");
                 foreach (SeaMonster seaMonster in seaMonsters)
                 {
                     Console.WriteLine(seaMonster.Name);
                 }
-
                 Console.WriteLine();
-                Console.Write("Which Sea Monster would you like to interact with? ");
+                
                 do
-                {                    
+                {
+                    Console.Write("Which Sea Monster would you like to interact with? ");
                     monsterChoosen = Console.ReadLine();
                     foreach (SeaMonster seaMonster in seaMonsters)
                     {
@@ -635,7 +608,6 @@ namespace MonsterClasses
                         }
                         else
                         {
-                            Console.WriteLine("Please Enter an Excisting Monster.");
                             validResponse = false;
                         }
                     }
@@ -655,12 +627,14 @@ namespace MonsterClasses
                         Console.WriteLine($"Active: {(seaMonster.IsActive() ? "Yes" : "No")}");
                         Console.WriteLine();
 
+                    while (!exiting)
+                    {
                         Console.WriteLine($"What would you like {seaMonster.Name} to do:");
                         Console.WriteLine("\t\t\t\t1) Trade");
                         Console.WriteLine("\t\t\t\t2) Battle");
                         Console.WriteLine("\t\t\t\t3) Chat");
+                        Console.WriteLine("\t\t\t\t4) Exit");
                         Console.WriteLine("Please type your response");
-                        
                         do
                         {
                             validResponse = int.TryParse(Console.ReadLine(), out int menuChoice);
@@ -668,29 +642,34 @@ namespace MonsterClasses
                             {
                                 case 1:
                                     DisplaySeaTradeInterface(seaMonster, spaceMonsters, tradeStores);
+                                    validResponse = true;
                                     break;
                                 case 2:
                                     DisplaySeaBattleInterface(seaMonster, spaceMonsters);
+                                    validResponse = true;
                                     break;
                                 case 3:
                                     DisplaySeaChatInterface(seaMonster, spaceMonsters, tradeStores);
+                                    validResponse = true;
                                     break;
                                 case 4:
                                     exiting = true;
+                                    validResponse = true;
                                     break;
                                 default:
                                     Console.WriteLine("Please Enter a valid Response. ");
                                     break;
                             }
-                        } while (exiting);
+                        } while (!validResponse);
 
                     }
-                }
-            }
-            
+                        
+                        
+
+                    }
+                }            
 
         }
-
 
         /// <summary>
         /// Interface Methods offiliated with spaceMONSTER
@@ -750,7 +729,7 @@ namespace MonsterClasses
                                 DisplayPersonalChat(spaceMonster, tradeStore, seaMonster);
                             }
                         }
-                        break;
+                            break;
                     default:
                         Console.WriteLine("Please Enter a Correct Response.");
                         break;
@@ -846,6 +825,37 @@ namespace MonsterClasses
                     default:
                         break;
                 }
+                
+            }
+            else
+            {
+                switch (tradeStore.Communications)
+                {
+                    case Monster.MonsterCommunications.NONE:
+                        break;
+                    case Monster.MonsterCommunications.HAPPY:
+                        Console.WriteLine($"{seaMonster.Name} says: Okay let me see if I can help");
+                        break;
+                    case Monster.MonsterCommunications.SAD:
+                        Console.WriteLine($"{seaMonster.Name} says: I don't think I'm strong enough to help at this point in time.");
+                        break;
+                    case Monster.MonsterCommunications.BEG:
+                        Console.WriteLine($"{seaMonster.Name} says: Please Dont Hurt Me!");
+                        break;
+                    case Monster.MonsterCommunications.ANGRY:
+                        Console.WriteLine($"{seaMonster.Name} says: If you wanna fight lets do it! Throw the first punch!");
+                        break;
+                    case Monster.MonsterCommunications.TRADE:
+                        Console.WriteLine($"{seaMonster.Name} says: I would love to trade with you but first I need to know what you have available.");
+                        break;
+                    case Monster.MonsterCommunications.THREATEN:
+                        Console.WriteLine($"{seaMonster.Name} says: Listen here pip squeek, I'll crush you!");
+                        break;
+                    case Monster.MonsterCommunications.STUNNED:
+                        break;
+                    default:
+                        break;
+                }
             }
             DisplayContinuePrompt();
         }
@@ -862,21 +872,30 @@ namespace MonsterClasses
             {
                 Console.WriteLine(seaMonster.Name);
             }
-
-            Console.Write("Type your answer: ");
+            
             do
             {
+                Console.Write("Enter your opponent: ");
                 userAnswer = Console.ReadLine();
                 foreach (SeaMonster seaMonster in seaMonsters)
                 {
                     if (userAnswer == seaMonster.Name)
-                    {
-                        DisplayPlayOutBattle(spaceMonster, seaMonster);
+                    {                        
                         validResponse = true;
+                    }
+                    else
+                    {
+                        validResponse = false;
                     }
                 }
             } while (!validResponse);
-
+            foreach (SeaMonster seaMonster in seaMonsters)
+            {
+                if (userAnswer == seaMonster.Name)
+                {
+                    DisplayPlayOutBattle(spaceMonster, seaMonster);
+                }
+            }
         }
 
         //
@@ -894,7 +913,7 @@ namespace MonsterClasses
         private static void DisplayTradeInterface(SpaceMonster spaceMonster, List<SpaceMonster> spaceMonsters, List<SeaMonster> seaMonsters, List<TradeStore> tradeStores)
         {
             DisplayHeader("Trade With The Trade Store");
-            bool validResponse = false;
+            bool validResponse = true;
             string userAnswer;
             Console.WriteLine("Which Trade store would you like to trade with? ");
             foreach (TradeStore tradeStore in tradeStores)
@@ -909,15 +928,24 @@ namespace MonsterClasses
                 {
                     if (userAnswer == tradestore.Name)
                     {
-                        DisplaySpaceTradeWithStore(spaceMonster, tradestore);
-                        validResponse = true;
-                    }
+                        validResponse = true;                                        
+                    }                   
                     else
                     {
+                        Console.WriteLine("Invalid Entry, please retype the clerk");
                         validResponse = false;
-                    }
-                }
+                    }                   
+                }                
             } while (!validResponse);
+
+            foreach (TradeStore tradestore in tradeStores)
+            {
+                if (userAnswer == tradestore.Name)
+                {
+                    DisplaySpaceTradeWithStore(spaceMonster, tradestore);
+                }
+
+            }
         }
 
         //
@@ -928,6 +956,7 @@ namespace MonsterClasses
             Console.WriteLine($"{spaceMonster.Name} trades with {tradestore.Name} and" +
                $"\n{spaceMonster.Name} recieves Armour: {spaceMonster.MonsterTradeArmourResponse(tradestore)} " +
                $"\nand Weapon: {spaceMonster.MonsterTradeWeaponResponse(tradestore)}");
+            DisplayContinuePrompt();
         }
         #endregion
 
@@ -961,7 +990,6 @@ namespace MonsterClasses
                 {
                     if (userAnswer == tradestore.Name)
                     {
-                        DisplaySeaTradeWithStore(seaMonster, tradestore);
                         validResponse = true;
                     }
                     else
@@ -971,7 +999,14 @@ namespace MonsterClasses
                 }
             } while (!validResponse);
 
-
+            foreach (TradeStore tradestore in tradeStores)
+            {
+                if (userAnswer == tradestore.Name)
+                {
+                    DisplaySeaTradeWithStore(seaMonster, tradestore);
+                }
+               
+            }
         }
 
         //
@@ -982,6 +1017,7 @@ namespace MonsterClasses
             Console.WriteLine($"{seaMonster.Name} trades with {tradestore.Name} and" +
                 $"\n{seaMonster.Name} recieves Armour: {seaMonster.MonsterTradeArmourResponse(tradestore)} " +
                 $"\nand Weapon: {seaMonster.MonsterTradeWeaponResponse(tradestore)}");
+            DisplayContinuePrompt();
         }
         //
         // as seamonster you choose who you want to battle
@@ -996,25 +1032,31 @@ namespace MonsterClasses
             {
                 Console.WriteLine(spaceMonster.Name);
             }
-
-            Console.Write("Type your answer: ");
+            
             do
             {
+                Console.Write("Enter your opponent: ");
                 userAnswer = Console.ReadLine();
                 foreach (SpaceMonster spaceMonster in spaceMonsters)
                 {
                     if (userAnswer == spaceMonster.Name)
                     {
-                        DisplayPlayOutSeaBattle(spaceMonster, seaMonster);
+                        
                         validResponse = true;
                     }
                     else
                     {
-                        Console.WriteLine("invalid entry, please enter an excisting. ");
                         validResponse = false;
                     }
                 }
             } while (!validResponse);
+            foreach (SpaceMonster spaceMonster in spaceMonsters)
+            {
+                if (userAnswer == spaceMonster.Name)
+                {
+                    DisplayPlayOutSeaBattle(spaceMonster, seaMonster);
+                }
+            }
         }
         //
         // as seamonster the battle is played out
@@ -1172,9 +1214,53 @@ namespace MonsterClasses
                         break;
                 }
             }
+            else
+            {
+                switch (tradeStore.Communications)
+                {
+                    case Monster.MonsterCommunications.NONE:
+                        break;
+                    case Monster.MonsterCommunications.HAPPY:
+                        Console.WriteLine($"{seaMonster.Name} says: Okay let me see if I can help");
+                        break;
+                    case Monster.MonsterCommunications.SAD:
+                        Console.WriteLine($"{seaMonster.Name} says: I don't think I'm strong enough to help at this point in time.");
+                        break;
+                    case Monster.MonsterCommunications.BEG:
+                        Console.WriteLine($"{seaMonster.Name} says: Please Dont Hurt Me!");
+                        break;
+                    case Monster.MonsterCommunications.ANGRY:
+                        Console.WriteLine($"{seaMonster.Name} says: If you wanna fight lets do it! Throw the first punch!");
+                        break;
+                    case Monster.MonsterCommunications.TRADE:
+                        Console.WriteLine($"{seaMonster.Name} says: I would love to trade with you but first I need to know what you have available.");
+                        break;
+                    case Monster.MonsterCommunications.THREATEN:
+                        Console.WriteLine($"{seaMonster.Name} says: Listen here pip squeek, I'll crush you!");
+                        break;
+                    case Monster.MonsterCommunications.STUNNED:
+                        break;
+                    default:
+                        break;
+                }
+            }
 
         }
         #endregion
+
+        static void DisplayOpeningScreen()
+        {
+            Console.Clear();
+
+            Console.WriteLine();
+            Console.WriteLine("\t\tWelcome To the Monster Playground.");
+            Console.WriteLine("\t\tBy: PJ Ruddy");
+            Console.WriteLine("\t\t2/24/19");
+            Console.WriteLine();
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+        }
 
         /// <summary>
                 /// display closing screen
