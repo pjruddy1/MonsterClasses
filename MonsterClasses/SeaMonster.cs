@@ -193,7 +193,10 @@ namespace MonsterClasses
         }
 
         #endregion
-
+        public SeaMonster(int id, string name, int hitPoints) : base(id, name, hitPoints)
+        {
+             
+        }
         
     }
 }

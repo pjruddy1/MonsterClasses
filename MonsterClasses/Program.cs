@@ -15,9 +15,11 @@ namespace MonsterClasses
             DisplayClosingScreen();            
         }
 
+        
+        #region  Using 3 Different constructors to instantiate objects
         static void InitializeSeaMonster(List<SeaMonster> seaMonsters)
         {
-            SeaMonster suzy = new SeaMonster()
+            SeaMonster suzy = new SeaMonster(99, "Suzy", 100)
             {
                 Id = 99,
                 Name = "Suzy",
@@ -28,15 +30,27 @@ namespace MonsterClasses
                 SeaName = "Baltic Sea"
             };
             seaMonsters.Add(suzy);
+
+            SeaMonster globby = new SeaMonster(45, "globby", 125)
+            {
+                Age = 555,
+                Gold = 799,
+                HasGills = true,
+                SeaName = "Red Sea",
+                ArmourCarried = Monster.Armour.WETSUIT,
+                WeaponsCarried = Monster.Weapons.WATERCANON,
+
+            };
+            seaMonsters.Add(globby);
         }
 
         static void InitializeSpaceMonster(List<SpaceMonster> spaceMonsters)
         {
             
-            SpaceMonster bill = new SpaceMonster()
+            SpaceMonster bill = new SpaceMonster("Bill")
             {
                 Id = 195,
-                Name = "Bill",
+                Name= "bill",
                 Age = 1001,
                 Gold = 600,
                 HitPoints = 125,                
@@ -44,8 +58,20 @@ namespace MonsterClasses
                 
             };
             spaceMonsters.Add(bill);
-        }
 
+            SpaceMonster kuhuana = new SpaceMonster("Kuhuana")
+            {
+                Id = 117,
+                Age = 1671,
+                Gold = 12000,
+                HitPoints = 225,
+                HasSpaceship = true,
+                WeaponsCarried = Monster.Weapons.BEAMRAY,
+                ArmourCarried = Monster.Armour.CHESTPLATE
+            };
+            spaceMonsters.Add(kuhuana);
+        }
+        
         static void InitializeTradeStore(List<TradeStore> tradeStore)
         {
 
@@ -96,7 +122,7 @@ namespace MonsterClasses
             };
             tradeStore.Add(seaClerk);
         }
-
+        #endregion
 
         //
         // MainMenu
@@ -108,9 +134,7 @@ namespace MonsterClasses
             List<TradeStore> tradeStores = new List<TradeStore>();
             bool exiting = false;
             InitializeSeaMonster(seaMonsters);
-            //InitializeWithDifferentConstructor1(seaMonsters);
             InitializeSpaceMonster(spaceMonsters);
-            //InitializeWithDifferentConstructor2(spaceMonsters);
             InitializeTradeStore(tradeStores);
 
             while (!exiting)
@@ -151,19 +175,12 @@ namespace MonsterClasses
 
             }
         }
+        
 
-        //
-        // TRYING TO INSTANTIATE With a different constructor
-        //
-        //private static void InitializeWithDifferentConstructor1(List<SeaMonster> seaMonsters)
-        //{
-        //    SeaMonster globby = new Monster("Globby")
-        //    {
-        //        Id = 45,
-        //        Is
-
-        //    };
-        //}
+        private static void initializewithdifferentconstructor1(List<SeaMonster> seamonsters)
+        {
+            
+        }
 
 
         //

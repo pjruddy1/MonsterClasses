@@ -182,5 +182,10 @@ namespace MonsterClasses
             }
         }
         #endregion
+
+        public SpaceMonster(string name) : base(name)
+        {
+
+        }
     }
 }
